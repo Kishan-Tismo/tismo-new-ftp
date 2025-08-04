@@ -1,0 +1,43 @@
+
+
+<div class="gridContainer">
+
+  <div class="fileIcon">
+    <span *ngIf="file.isFolder" class="fileDownLoadIcon" title="Download {{file.name}} folder." (click)="fileDownLoad.emit(file)">
+     <span class="material-icons-outlined" > file_download</span>
+    </span>
+     <span *ngIf="file.isFolder" class="material-icons iconSize"> folder</span>
+     <span *ngIf="!file.isFolder" class="material-icons iconSize"> {{fileIcon}} </span>
+
+  </div>
+
+  <div *ngIf="!newFolder" class="fileName" [ngClass]="{'mouseOnDeleteIcon': deleteHoverActive ==true}">
+    <div *ngIf="!file.isFolder" title="Download '{{file.name}}' - {{file.size}} bytes"  (click)="fileDownLoad.emit(file)"> {{file.name}} </div>
+    <div *ngIf="file.isFolder" title="Go to folder '{{file.name}}'"   (click)="changeFolder.emit(file.name)"> {{file.name}} </div>
+
+  </div>
+
+  <div *ngIf="newFolder" class="fileName">
+    <input
+
+      class="newFolderEdit t2elem"
+      required
+      type="text"
+      name="newFolderName"
+      [(ngModel)]="newFolderName"
+      id="newFolderNameInput"
+      placeholder="Untitled folder"
+      autofocus
+    />
+    <div>
+    <button class="createButton" (click)="createNewFolder.emit(this.newFolderName)">Create</button>
+    <button class="createButton" (click)="cancelNewFolder.emit()">Cancel</button>
+    </div>
+  </div>
+
+  <div *ngIf="!newFolder" class="fileSize"  title="{{file.size}} bytes">{{file.size > 0 ? fileSizeStr(file.size) : ""}}</div>
+  <div *ngIf="!newFolder" class="createdOn">{{file.createdOn.toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })}}</div>
+  <div *ngIf="!newFolder" title="Delete {{file.name}}" class="delete" (mouseenter) = "deleteHoverEnter()" (mouseleave)="deleteHoverLeave()" (click)="deleteFileClicked()" >
+    <span class="material-icons-outlined deleteIcon">delete</span>
+  </div>
+</div>

@@ -1,0 +1,88 @@
+
+@import '../app.styles.scss';
+
+
+
+.gridContainer {
+  display: grid;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  align-items: center;
+  grid-template-columns: 10vw 20vw 10vw 12vw 1vw;
+  grid-template-areas:
+    "fileIcon  fileName   fileSize createdOn delete"
+
+;
+
+}
+.delete {
+  grid-area:delete;
+  text-align: left;
+
+
+  :hover {
+    color: darkgreen;
+    cursor: pointer;
+  }
+}
+
+.fileDownLoadIcon {
+  :hover {
+    color: darkgreen;
+    cursor: pointer;
+  }
+}
+
+.deleteIcon {
+  font-size: 18px;
+  color: #8e9d25;
+
+}
+
+.fileIcon {
+  grid-area: fileIcon;
+
+  text-align: right;
+  color: darkgoldenrod;
+}
+
+.iconSize {
+  font-size: 20px;
+
+}
+.fileName {
+  grid-area: fileName;
+  text-align: left;
+  font-size: $small-font;
+  text-decoration: underline;
+  color: darkslategrey;
+  cursor: pointer;
+}
+
+
+.fileName.mouseOnDeleteIcon {
+  text-decoration: none;
+  font-weight: bold;
+  color: #FF5733;
+}
+
+.fileSize {
+  grid-area: fileSize;
+  text-align: right;
+  font-size: $small-font;
+  color: darkslategray;
+}
+.createdOn {
+  grid-area: createdOn;
+  text-align: left;
+  font-size: $small-font;
+  color: darkslategray;
+}
+
+.createButton {
+  margin : 5px;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}

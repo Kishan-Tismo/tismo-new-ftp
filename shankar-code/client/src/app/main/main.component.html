@@ -1,0 +1,64 @@
+
+
+<div >
+  <div class="topbar">
+     <span>
+      <img class="logo" src="assets/TismoLogoSmall.png" alt="logo">
+    </span>
+    <span class="pageTitle">{{title}}</span>
+  </div>
+
+
+  <div *ngIf="showLogin" class="gridContainer">
+    <form>
+      <div class='focus-in-expand'>
+        <div class='gridcontainer' >
+          <div class="t4group userName">
+            <label class='t1elem' >User</label>
+            <input class="form-control t2elem" required type="text" name='userNameField'
+                   autocomplete="username"
+                   [(ngModel)]="userName">
+
+          </div>
+          <div class="t5group password">
+            <label class='t1elem'>Password</label>
+
+            <input [type]="pwdinputType" class="t2elem form-control"
+                   autocomplete="current-password"
+                   required [(ngModel)]="password" name='pwdField' />
+            <span *ngIf="pwdinputType=='password'" class="t5elem material-icons iconSize" (click)="onPwdVisibleClick()" style="color:gray;" >visibility_off</span>
+            <span *ngIf="pwdinputType=='text'" class="t5elem material-icons iconSize" (click)="onPwdVisibleClick()" style="color:gray;">visibility</span>
+
+
+          </div>
+
+
+          <div class="t4group submit">
+
+            <button class="btn  t2elem" (click)="onClick()" type=submit >Login </button>
+
+          </div>
+
+
+          <div class="message t4group" >
+            <div class="success t2elem"> {{successMessage}} </div>
+            <div  class="errors t2elem"> {{errorMessage}} </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="!showLogin" class="approot">
+    <app-root></app-root>
+  </div>
+
+  <hr/>
+  <div class="version"> Copyright  &copy; 2022 Tismo Technology Solutions (P) Ltd. <br>
+    Build {{build}}
+  </div>
+
+</div>

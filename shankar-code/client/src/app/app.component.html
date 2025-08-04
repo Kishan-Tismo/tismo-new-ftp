@@ -1,0 +1,78 @@
+
+
+<div class="gridcontainer" >
+
+
+  <div class="ccode">
+    <div class="code"> {{customerCode}}</div>
+  </div>
+
+  <div class="message" [ngClass]="message=='' ? 'hidden' : 'visible' " >
+    <span class="Success">{{ message }}</span>
+  </div>
+
+  <div class="message" [ngClass]="errorMessage=='' ? 'hidden' : 'visible' ">
+    <span class="Errors">{{ errorMessage }}</span>
+  </div>
+
+  <div class="toolbar">
+
+    <div class="newFolder " (click)="newFolderButtonClicked()">
+      <span class="material-icons-outlined newFolderIcon grow">create_new_folder</span>
+      <p class="newFolderLabel ">New Folder</p>
+    </div>
+
+    <div class="upload " onclick="document.getElementById('attachmentuploadfile').click()">
+
+       <span class="material-icons uploadIcon grow">upload_file </span>
+        <input class="t2elem noborder" #file id="attachmentuploadfile" [(ngModel)]="inputFileNames"
+               type="file" multiple (change)="doFileUpload(file.files)" />
+        <p class="uploadFileLabel">Upload File</p>
+    </div>
+
+    <div class="uploadFolder " onclick="document.getElementById('attachmentuploadfolder').click()">
+
+      <span class="material-icons uploadFolderIcon grow">drive_folder_upload </span>
+      <input class="t2elem noborder" #folder id="attachmentuploadfolder" [(ngModel)]="inputFolderNames"
+             type="file" webkitdirectory  multiple (change)="doFileUpload(folder.files)" />
+      <p class="uploadFileFolderLabel">Upload Folder</p>
+    </div>
+
+    <div class="logout alignright " (click)="doLogout()">
+      <span class="material-icons logoutIcon grow" > logout </span>
+      <p class="logoutLabel">Logout</p>
+    </div>
+
+  </div>
+
+
+  <div class="fullpath" title="Go to parent folder"  >
+    <span *ngIf="showBackArrow" class="material-icons-outlined backSpan grow" (click)="changeToParentFolder()" > arrow_back </span>
+    <span class="currentFolder"> {{currentFolder}} </span>
+  </div>
+
+  <div class="filenames"  >
+      <div *ngFor="let node of pathNodes">
+        <app-tfile [file]="node"
+                   [currentFolder]="currentFolder"
+                   (fileDownLoad)="fileDownLoad($event)"
+                   (changeFolder)="changeFolder($event)"
+                   (deleteFileFolder)="deleteFileFolder($event)"
+        >
+        </app-tfile>
+      </div>
+  </div>
+
+  <form *ngIf="newFolderPNode" class="newFolderInput">
+    <app-tfile [file]="newFolderPNode"
+               [newFolder]="true"
+               [currentFolder]="currentFolder"
+               (createNewFolder)="doNewFolder($event)"
+               (cancelNewFolder)="doCancelNewFolder()"
+    ></app-tfile>
+
+  </form>
+
+
+
+</div>

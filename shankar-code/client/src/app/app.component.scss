@@ -1,0 +1,242 @@
+
+@import './app.styles.scss';
+
+
+
+.gridcontainer {
+  display: grid;
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+
+  grid-template-columns: 25px  20fr  10fr  10fr;
+  grid-template-areas:
+    ".          message       message        ."
+    "ccode          toolbar       toolbar        ."
+    "ccode         fullpath      fullpath       ."
+    "ccode          filenames     filenames       ."
+    ".          newFolderInput newFolderInput ."
+
+
+  ;
+  padding: 5px;
+  margin-bottom: 80px;
+}
+
+.ccode {
+  grid-area: ccode;
+
+}
+
+.code {
+  transform: translateX(70px) translateY(140px) rotate(270deg);
+  position: relative;
+  font-size: 64px;
+  color: #ffd700d1;
+  height: 127px;
+  z-index: -1;
+  // so that it does not cover clickable elements
+}
+
+
+#attachmentuploadfolder {
+  visibility: hidden;
+  height: 0px;
+  width: 0px;
+}
+
+#attachmentuploadfile {
+  visibility: hidden;
+  height: 0px;
+  width: 0px;
+}
+
+.toolbar {
+  grid-area: toolbar;
+  display: grid;
+  grid-column-gap: 5px;
+  grid-row-gap: 2px;
+
+  grid-template-columns: 10fr 10fr 10fr 10fr 15fr auto;
+  grid-template-areas:
+    ".    newFolder  upload uploadFolder logout .  ."
+
+}
+
+.message {
+  grid-area: message;
+  height: 20px;
+  margin-left: 120px;
+  transition: opacity ease-in-out 0.25s;
+
+}
+
+.Success {
+  vertical-align: middle;
+  transition: opacity ease-in-out;
+
+  padding: 5px;
+  border: 1px solid lightgray;
+  border-radius:5px;
+  background: $successcolor;
+  color: $dark1;
+}
+
+.Errors {
+  vertical-align: middle;
+  transition: opacity ease-in-out;
+
+  padding: 5px;
+  border: 1px solid lightgray;
+  border-radius:5px;
+  background: $errorbackground;
+  color: $dark1;
+}
+.tismologo { grid-area : tismologo; }
+
+.fullpath {
+  grid-area: fullpath;
+  margin-left: 125px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid lightgray;
+}
+.currentFolder {
+  color: darkslategrey;
+}
+
+.backButton {
+  grid-area: backButton;
+  text-align: right;
+}
+
+.grow { transition: all .2s ease-in-out; }
+.grow:hover { transform: scale(1.1); }
+
+.backSpan {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  transition: all ease 0.25s;
+  color: #8e9d25;
+  margin-right: -5px;
+  font-size: 32px;
+
+}
+.backSpan:hover {
+  color:green;
+  cursor: pointer;
+
+}
+
+.uploadFileFolderLabel,
+.uploadFileLabel,
+.newFolderLabel,
+.logoutLabel
+{
+  font-size: 5pt;
+  color: darkslategray;
+  text-align: left;
+
+}
+
+.logoutLabel {
+  margin-left: 8px;
+}
+
+.uploadFileFolderLabel,
+.uploadFileLabel {
+  margin-left: 5px;
+}
+.newFolderLabel {
+  margin-left: 3px;
+}
+
+.filenames {grid-area: filenames;}
+
+.newFolderInput { grid-area: newFolderInput}
+
+.actions {grid-area: actions;}
+
+.upload {
+  grid-area: upload;
+  text-align: left;
+  :hover {
+    cursor: pointer;
+  }
+}
+
+.uploadFolder {
+  grid-area: uploadFolder;
+  text-align: left;
+  :hover {
+    cursor: pointer;
+  }
+}
+.newFolder {
+  grid-area: newFolder;
+  text-align: left;
+  :hover {
+    cursor: pointer;
+  }
+}
+
+//
+//.newFolderIcon {
+//  font-size: 32px;
+//  color: #8e9d25;
+//}
+//.newFolderIcon:hover {
+//  cursor: pointer;
+//  color: darkgreen;
+//}
+
+.newFolderIcon,
+.uploadFolderIcon,
+.uploadIcon {
+  font-size: 32px;
+  text-align: left;
+  color: #8e9d25;
+}
+
+.newFolderIcon:hover,
+.uploadFolderIcon:hover,
+.uploadIcon:hover {
+  cursor: pointer;
+  color: darkgreen;
+}
+.footer {grid-area: footer;}
+
+.logout {
+  grid-area: logout;
+  :hover {
+    cursor: pointer;
+  }
+}
+
+.logoutIcon {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 32px;
+  color: #8e9d25;
+
+}
+
+.logoutIcon:hover {
+  //border-radius: 4px;
+  //border: 1px solid darkgray;
+  cursor: pointer;
+  color: darkgreen;
+  //background: blanchedalmond;
+
+}
+
+.error-color {
+  color: salmon;
+}
+
+.hidden {
+  opacity: 0;
+}
+.visible {
+  opacity: 1;
+}

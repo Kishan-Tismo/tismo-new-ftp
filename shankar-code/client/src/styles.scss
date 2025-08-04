@@ -1,0 +1,164 @@
+
+
+$font-stack: 'Roboto', Helvetica, sans-serif;
+$small-font: 14px;
+$dark1: #143b83;
+$light1: #98c3f3;
+$light1select: #98c3f37f;
+$dark2: #dc5b4d;
+$light2: #fdb39e;
+$dwhite: rgb(216, 212, 212);
+$errorColor: salmon;
+$successcolor: rgba(0, 128, 0, 0.25);
+$errorbackground: rgba(128, 0, 0, 0.25);
+
+body {
+  height : 100%;
+  font-family: $font-stack;
+
+  background-repeat: no-repeat;
+}
+div {
+  font-family: $font-stack;
+}
+
+h1,
+.title {
+  margin-left: 10px;
+  margin-top: 10px;
+  font-size: 32pt;
+  font-stretch: ultra-expanded;
+  font-weight: 100;
+}
+.subtitle {
+  margin-left: 10px;
+  margin-bottom: 10px;
+  font-size: 14pt;
+  font-stretch: ultra-expanded;
+  font-weight: 100;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.t5group {
+  display: grid;
+  height: 100%;
+  grid-column-gap: 10px;
+  grid-template-columns: 4rem 16rem auto;
+  grid-template-areas:
+    't1elem t2elem t5elem'
+    't3elem t4elem .';
+}
+
+
+.t4group {
+  display: grid;
+  height: 100%;
+  grid-column-gap: 10px;
+  grid-template-columns: 4rem 16rem;
+  grid-template-areas:
+    't1elem t2elem '
+    't3elem t4elem ';
+}
+
+.t1elem {
+  grid-area: t1elem;
+  margin: 0;
+  align-self: end;
+}
+label.t1elem {
+  font-size: $small-font;
+  color: darkolivegreen;
+}
+
+.t2elem {
+  grid-area: t2elem;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+
+  align-self: end;
+}
+
+textarea.t2elem,
+input.t2elem {
+  background: transparent;
+  border-bottom: 1px solid #42a948;
+  border-left: 0px;
+  border-right: 0px;
+  border-top: 0px;
+  border-radius: 0px;
+}
+
+.t3elem {
+  grid-area: t3elem;
+  font-size: $small-font;
+  margin: 0;
+  align-self: end;
+}
+
+.t4elem {
+  grid-area: t4elem;
+  align-self: end;
+  justify-self: center;
+}
+.t5elem {
+  grid-area: t5elem;
+  align-self: start;
+  justify-self: left;
+}
+
+.aligncenter {
+  align-self: center;
+  text-align: center;
+}
+.alignleft {
+  align-self: start;
+  text-align: left;
+  justify-self: left;
+}
+.alignright {
+  text-align: right;
+  justify-self: right;
+}
+//
+//.noborder {
+//  border: 0px;
+//}
+
+//
+//// on hover puts a border in black
+//// on click removes the box-shadow
+//.btn {
+//  background: $light1;
+//  color: $dark1;
+//  display: inline-block;
+//  font-weight: 400;
+//  font-size: 1rem;
+//  line-height: 1.5;
+//
+//  user-select: none;
+//
+//  border: 1px solid transparent;
+//  border-radius: 0.25rem;
+//
+//  padding: 0.375rem 0.75rem;
+//  text-align: center;
+//  vertical-align: middle;
+//
+//
+//  transition: all 500ms;
+//  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
+//  &:hover {
+//    color: black;
+//    border: 1px solid;
+//    font-weight: bold;
+//  }
+//  &:active {
+//    color: black;
+//    border: 1px solid;
+//    box-shadow: 0px 0px 0px 0 rgba(0, 0, 0, 0.2);
+//    transform: translate(2px, 2px);
+//  }
+//}
