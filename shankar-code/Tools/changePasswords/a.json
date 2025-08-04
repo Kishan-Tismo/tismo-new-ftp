@@ -1,0 +1,12 @@
+
+{
+  "Settings" : {
+"CustomerCode":"tca099",
+"ClientUserName":"client",
+"ClientHashedPassword":"1hMGptjSq4CQ5z6FRoJHxhvNNzM3yoTHaepoPH+XQjE=",
+"ClientSalt":"RjbzaLVlzQkwtOaV1nn7Ww==",
+"TismoUserName":"tismo",
+"TismoHashedPassword":"4FnzMuuwJJxEN0vlTsJQQJBkKQ8miPcvAUehyxXbdLQ=",
+"TismoSalt":"mALGLspCh8rCRQ8mjwH+6A=="
+}
+}

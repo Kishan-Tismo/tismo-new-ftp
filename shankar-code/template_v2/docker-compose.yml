@@ -1,0 +1,15 @@
+version: '3'
+services:
+  tft:
+    image: filetransferdock_v2_linux
+    environment:
+       - TZ=Asia/Kolkata
+    volumes:
+       - ./appsettings.json:/app/appsettings.json:ro
+       - ./appsettings.production.json:/app/appsettings.production.json:ro
+       - ./TismoFileServer.log:/app/TismoFileServer.log
+       - ./files_v2:/app/files_v2
+    ports:
+       - "3XXX:8080"
+         
+

@@ -1,0 +1,14 @@
+
+version: '3'
+services:
+  tft:
+    image: filetransferdock_v2_macm1
+    volumes:
+       - ./app/appsettings.json:/app/appsettings.json:ro
+       - ./app/appsettings.production.json:/app/appsettings.production.json:ro
+       - ./app/logs:/app/logs
+       - ./files:/app/files
+    ports:
+       - "3999:8080"
+
+

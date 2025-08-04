@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+  </PropertyGroup>
+
+  <ItemGroup>
+    
+    <Compile Include="Types.fs" />
+    <Compile Include="Logger.fs" />
+
+    <Compile Include="User.fs" />
+    <Compile Include="Utils.fs" />
+    <Compile Include="Password.fs" />
+    <Compile Include="FileIO.fs" />
+    <Compile Include="FileServer.fs" />
+    <Compile Include="Program.fs" />
+    <Content Include="buildCopyClient.sh" />
+  </ItemGroup>
+
+  <ItemGroup>
+
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Swashbuckle.AspnetCore" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspnetCore.SwaggerUI" Version="6.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.1" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\3rdpartylicenses.txt" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\TismoLogoSmall.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\favicon.ico" />
+    <_ContentIncludedByDefault Remove="wwwroot\index.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\main.5a5ce37533a7e586.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\polyfills.a151bed753c7da9d.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\runtime.52f1d05aa6c3afea.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\styles.c78697aaccc84b65.css" />
+    <_ContentIncludedByDefault Remove="files\asdf\qewr\Debug\net7.0\codeReviewGen.deps.json" />
+    <_ContentIncludedByDefault Remove="files\asdf\qewr\Debug\net7.0\codeReviewGen.runtimeconfig.json" />
+  </ItemGroup>
+
+</Project>
