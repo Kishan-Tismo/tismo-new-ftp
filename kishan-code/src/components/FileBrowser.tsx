@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState, useEffect } from "react";
 import { PathNode } from "@/lib/types";
@@ -9,6 +9,13 @@ import { Input } from "./ui/Input";
 import * as api from "@/services/api";
 import { useAuth } from "@/contexts/AuthContext";
 import { sanitizeFileName } from "@/lib/utils";
+import DirectorySelector from "./DirectorySelector";
+import PathBar from "./PathBar";
+import ViewToggle from "./ViewToggle";
+import FileActions from "./FileActions";
+import FolderActions from "./FolderActions";
+import FileTable from "./FileTable";
+import Footer from "./Footer";
 
 export default function FileBrowser() {
   const [pathNodes, setPathNodes] = useState<PathNode[]>([]);
@@ -49,7 +56,9 @@ export default function FileBrowser() {
   const handleDelete = async (item: PathNode) => {
     if (!token) return;
     const confirmation = window.confirm(
-      `Are you sure you want to delete ${item.isFolder ? "folder" : "file"} "${item.name}"?`
+      `Are you sure you want to delete ${item.isFolder ? "folder" : "file"} "${
+        item.name
+      }"?`
     );
     if (!confirmation) return;
 
@@ -136,56 +145,18 @@ export default function FileBrowser() {
   };
 
   return (
-    <div>
+    <div className="file-browser-container">
       <Header />
-      <div className="p-4">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-semibold">Current Folder: {currentFolder}</h2>
-          <div className="flex gap-2">
-            {currentFolder !== "/" && <Button onClick={goUp}>Up</Button>}
-            <Button onClick={() => setShowNewFolderInput(!showNewFolderInput)}>
-              New Folder
-            </Button>
-            <Input
-              type="file"
-              multiple
-              onChange={(e) => handleFileUpload(e.target.files)}
-              className="hidden"
-              id="file-upload"
-            />
-            <label htmlFor="file-upload" className="cursor-pointer">
-              <Button asChild>
-                <span>Upload Files</span>
-              </Button>
-            </label>
-          </div>
+      <DirectorySelector />
+      <PathBar />
+      <div className="tables-container">
+        <div className="action-container">
+          <FileActions />
+          <br />
+          <FolderActions />
         </div>
-        {showNewFolderInput && (
-          <div className="flex gap-2 mb-4">
-            <Input
-              type="text"
-              value={newFolderName}
-              onChange={(e) => setNewFolderName(e.target.value)}
-              placeholder="Enter folder name"
-            />
-            <Button onClick={handleCreateFolder}>Create</Button>
-            <Button variant="outline" onClick={() => setShowNewFolderInput(false)}>
-              Cancel
-            </Button>
-          </div>
-        )}
-        {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-        {message && <p className="text-green-500">{message}</p>}
-        <div>
-          {pathNodes.map((item) => (
-            <FileItem
-              key={item.name}
-              item={item}
-              onSelect={handleSelect}
-              onDelete={handleDelete}
-              onDownload={handleDownload}
-            />
-          ))}
+        <div className="documents-container">
+          <FileTable />
         </div>
       </div>
     </div>

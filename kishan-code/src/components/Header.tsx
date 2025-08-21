@@ -1,7 +1,11 @@
-"use client"
+"use client";
 
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "./ui/Button";
+import Image from "next/image";
+
+import logo from "@/assets/logo.png";
+import logoutIcon from "@/assets/logout.png";
 
 export default function Header() {
   const { logout } = useAuth();
@@ -11,9 +15,25 @@ export default function Header() {
   };
 
   return (
-    <header className="flex justify-between items-center p-4 bg-gray-100 dark:bg-gray-800">
-      <h1 className="text-xl font-bold">File Transfer</h1>
-      <Button onClick={handleLogout}>Logout</Button>
-    </header>
+    <div className="header-div">
+      <Image src={logo} alt="company-logo" width={125} title="Tismo" />
+      <div className="company-code-container">
+        <h1 className="text-lg font-bold" title="Client Code">
+          tca207
+        </h1>
+        <div className="vertical-separator"></div>
+        <h1 className="text-lg font-light" title="Client Name">
+          Kern Laser Systems
+        </h1>
+      </div>
+      <Image
+        src={logoutIcon}
+        alt="logout-button"
+        width={35}
+        title="Logout"
+        onClick={handleLogout}
+        style={{ cursor: "pointer" }}
+      />
+    </div>
   );
 }
