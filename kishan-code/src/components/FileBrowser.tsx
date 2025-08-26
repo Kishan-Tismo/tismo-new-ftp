@@ -2,20 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { PathNode } from "@/lib/types";
-import FileItem from "./FileItem";
-import Header from "./Header";
-import { Button } from "./ui/Button";
-import { Input } from "./ui/Input";
+import Header from "@/components/Header";
 import * as api from "@/services/api";
 import { useAuth } from "@/contexts/AuthContext";
 import { sanitizeFileName } from "@/lib/utils";
-import DirectorySelector from "./DirectorySelector";
-import PathBar from "./PathBar";
-import ViewToggle from "./ViewToggle";
-import FileActions from "./FileActions";
-import FolderActions from "./FolderActions";
-import FileTable from "./FileTable";
-import Footer from "./Footer";
+import DirectorySelector from "@/components/DirectorySelector";
+import PathBar from "@/components/PathBar";
+import FileActions from "@/components/FileActions";
+import FileTable from "@/components/FileTable";
 
 export default function FileBrowser() {
   const [pathNodes, setPathNodes] = useState<PathNode[]>([]);
@@ -25,6 +19,7 @@ export default function FileBrowser() {
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const { token, logout } = useAuth();
+  const [animateIn, setAnimateIn] = useState(false);
 
   const fetchFiles = async () => {
     if (!token) return;
@@ -45,6 +40,11 @@ export default function FileBrowser() {
   useEffect(() => {
     fetchFiles();
   }, [currentFolder, token]);
+
+  // Animate in on mount
+  useEffect(() => {
+    setAnimateIn(true);
+  }, []);
 
   const handleSelect = (item: PathNode) => {
     if (item.isFolder) {
@@ -145,7 +145,11 @@ export default function FileBrowser() {
   };
 
   return (
-    <div className="file-browser-container">
+    <div
+      className={`file-browser-container${
+        animateIn ? " file-browser-animate-in" : ""
+      }`}
+    >
       <Header />
       <DirectorySelector />
       <PathBar />
@@ -153,7 +157,6 @@ export default function FileBrowser() {
         <div className="action-container">
           <FileActions />
           <br />
-          <FolderActions />
         </div>
         <div className="documents-container">
           <FileTable />

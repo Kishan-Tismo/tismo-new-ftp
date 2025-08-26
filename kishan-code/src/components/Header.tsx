@@ -3,6 +3,7 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "./ui/Button";
 import Image from "next/image";
+import { toast } from "sonner";
 
 import logo from "@/assets/logo.png";
 import logoutIcon from "@/assets/logout.png";
@@ -12,6 +13,7 @@ export default function Header() {
 
   const handleLogout = () => {
     logout();
+    toast.success("Logged out successfully");
   };
 
   return (

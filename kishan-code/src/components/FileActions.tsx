@@ -1,9 +1,9 @@
 import Image from "next/image";
 
+import newFileIcon from "@/assets/new_folder.png";
+import newFileActiveIcon from "@/assets/new_folder_active.png";
 import uploadFileIcon from "@/assets/upload_file.png";
 import uploadFileActiveIcon from "@/assets/upload_file_active.png";
-import uploadFolderIcon from "@/assets/upload_folder.png";
-import uploadFolderActiveIcon from "@/assets/upload_folder_active.png";
 import downloadFileIcon from "@/assets/download_file.png";
 import downloadFileActiveIcon from "@/assets/download_file_active.png";
 import renameIcon from "@/assets/edit.png";
@@ -14,7 +14,24 @@ import deleteActiveIcon from "@/assets/delete_active.png";
 export default function FileActions() {
   return (
     <div className="action-panel">
-      <h3 className="black-text">File Actions</h3>
+      <h3 className="black-text">Actions</h3>
+
+      {/* New File */}
+      <button className="new-button-radio">
+        <Image
+          src={newFileIcon}
+          alt="new-file"
+          width={25}
+          className="icon default"
+        />
+        <Image
+          src={newFileActiveIcon}
+          alt="new-file-active"
+          width={25}
+          className="icon hover"
+        />
+        <span className="small-button-text">New</span>
+      </button>
 
       {/* Upload File */}
       <button className="action-button-radio">
@@ -30,7 +47,7 @@ export default function FileActions() {
           width={25}
           className="icon hover"
         />
-        <span className="small-button-text">Upload or Drop</span>
+        <span className="small-button-text">Upload</span>
       </button>
 
       {/* Download File */}
@@ -47,7 +64,7 @@ export default function FileActions() {
           width={25}
           className="icon hover"
         />
-        <span className="small-button-text">Download File</span>
+        <span className="small-button-text">Download</span>
       </button>
 
       {/* Rename File */}
@@ -64,7 +81,7 @@ export default function FileActions() {
           width={25}
           className="icon hover"
         />
-        <span className="small-button-text">Rename File</span>
+        <span className="small-button-text">Rename</span>
       </button>
 
       {/* Delete File */}
@@ -81,7 +98,7 @@ export default function FileActions() {
           width={25}
           className="icon hover"
         />
-        <span className="small-button-text">Delete File</span>
+        <span className="small-button-text">Delete</span>
       </button>
     </div>
   );

@@ -3,6 +3,8 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
 import Footer from "@/components/Footer";
+import { FolderProvider } from "@/contexts/FolderContext";
+import { Toaster } from "@/components/ui/sonner";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -24,8 +26,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${montserrat.variable} antialiased`}>
         <AuthProvider>
-          {children}
-          <Footer />
+          <FolderProvider>
+            <Toaster position="top-center" richColors duration={1000} />
+            {children}
+            <Footer />
+          </FolderProvider>
         </AuthProvider>
       </body>
     </html>

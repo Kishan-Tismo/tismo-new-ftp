@@ -1,6 +1,12 @@
-"use client"
+"use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 
 interface AuthContextType {
   token: string | null;
@@ -14,20 +20,35 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("token");
-    if (storedToken) {
-      setToken(storedToken);
+    try {
+      const storedToken = localStorage.getItem("token");
+      if (storedToken) {
+        setToken(storedToken);
+      }
+    } catch (e) {
+      // localStorage may be unavailable (Safari private mode, etc.)
+      console.warn("localStorage unavailable", e);
     }
   }, []);
 
   const login = (newToken: string) => {
     setToken(newToken);
-    localStorage.setItem("token", newToken);
+    try {
+      localStorage.setItem("token", newToken);
+    } catch (e) {
+      // localStorage may be unavailable
+      console.warn("localStorage unavailable", e);
+    }
   };
 
   const logout = () => {
     setToken(null);
-    localStorage.removeItem("token");
+    try {
+      localStorage.removeItem("token");
+    } catch (e) {
+      // localStorage may be unavailable
+      console.warn("localStorage unavailable", e);
+    }
   };
 
   return (

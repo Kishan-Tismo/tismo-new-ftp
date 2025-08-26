@@ -1,23 +1,43 @@
 import { PathNode } from "@/lib/types";
 
-const API_BASE_URL = "http://localhost:5000"; // Assuming the backend runs on port 5000
+const API_BASE_URL = getBaseUrl(); // Assuming the backend runs on port 5000
 
-export async function login(username: string, password: string): Promise<string> {
+export function getBaseUrl() {
+  if (typeof window !== "undefined") {
+    // Client-side
+    return window.location.origin;
+  } else {
+    // Server-side (Next.js SSR)
+    return process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:5000";
+  }
+}
+
+export async function login(
+  username: string,
+  password: string
+): Promise<string> {
   const response = await fetch(
     `${API_BASE_URL}/login?user=${username}&pwd=${password}`
   );
   if (!response.ok) {
     throw new Error("Login failed");
   }
-  return response.text();
+  return response.json();
 }
 
-export async function getFileList(folder: string, token: string): Promise<PathNode[]> {
+export async function getFileList(
+  folder: string,
+  token: string
+): Promise<PathNode[]> {
+  console.info(token);
+
   const response = await fetch(
     `${API_BASE_URL}/fileList?folderName=${encodeURI(folder)}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
     }
   );
@@ -31,7 +51,10 @@ export async function getFileList(folder: string, token: string): Promise<PathNo
   }));
 }
 
-export async function createFolder(folderName: string, token: string): Promise<void> {
+export async function createFolder(
+  folderName: string,
+  token: string
+): Promise<void> {
   const response = await fetch(
     `${API_BASE_URL}/createFolder?folderName=${encodeURI(folderName)}`,
     {
@@ -46,7 +69,10 @@ export async function createFolder(folderName: string, token: string): Promise<v
   }
 }
 
-export async function deleteFile(fileName: string, token: string): Promise<void> {
+export async function deleteFile(
+  fileName: string,
+  token: string
+): Promise<void> {
   const response = await fetch(
     `${API_BASE_URL}/deleteFile/${encodeURIComponent(fileName)}`,
     {
@@ -61,7 +87,10 @@ export async function deleteFile(fileName: string, token: string): Promise<void>
   }
 }
 
-export async function deleteFolder(folderName: string, token: string): Promise<void> {
+export async function deleteFolder(
+  folderName: string,
+  token: string
+): Promise<void> {
   const response = await fetch(
     `${API_BASE_URL}/deleteFolder/${encodeURIComponent(folderName)}`,
     {
@@ -88,7 +117,11 @@ export async function uploadFiles(
   }
 
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", `${API_BASE_URL}/upload?folderName=${encodeURI(folder)}`, true);
+  xhr.open(
+    "POST",
+    `${API_BASE_URL}/upload?folderName=${encodeURI(folder)}`,
+    true
+  );
   xhr.setRequestHeader("Authorization", `Bearer ${token}`);
 
   xhr.upload.onprogress = (event) => {
@@ -117,11 +150,14 @@ export async function downloadFile(
   fileName: string,
   token: string
 ): Promise<void> {
-  const response = await fetch(`${API_BASE_URL}/download?filename=${encodeURI(fileName)}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const response = await fetch(
+    `${API_BASE_URL}/download?filename=${encodeURI(fileName)}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 
   if (!response.ok) {
     throw new Error("Download failed");

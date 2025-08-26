@@ -1,17 +1,25 @@
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
-import sanitize from "sanitize-filename";
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
-export function sanitizeFileName(fileName: string): string {
-  // sanitize() will replace illegal characters with ''
-  const sanitized = sanitize(fileName);
-  if (sanitized === "") {
-    // If the name is all illegal characters, we need to provide a default
-    return "renamed-file";
+/**
+ * Sanitizes a file or folder name by removing or rejecting invalid characters.
+ * Returns the sanitized name. If the name contains invalid characters, returns a sanitized version.
+ * If you want to only allow valid names, compare the return value to the input.
+ */
+export function sanitizeFileName(name: string): string {
+  // Windows reserved characters: \\ / : * ? " < > |
+  // Also disallow control chars and leading/trailing spaces or dots
+  // Empty or "." or ".." are not allowed
+  const invalidPattern = /[\\/:*?"<>|\x00-\x1F]/g;
+  let sanitized = name.replace(invalidPattern, "");
+  sanitized = sanitized.replace(/^\s+|\s+$/g, ""); // trim spaces
+  sanitized = sanitized.replace(/^\.+|\.+$/g, ""); // trim dots
+  if (sanitized === "" || sanitized === "." || sanitized === "..") {
+    return "";
   }
   return sanitized;
 }
